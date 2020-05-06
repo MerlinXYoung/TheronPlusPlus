@@ -31,7 +31,7 @@ License: LGPL 3.0
 
 #include "Actor.hpp"									 // The Actor framework
 #include "StandardFallbackHandler.hpp" // Reporting wrongly sent messages
-#include "NetworkEndPoint.hpp"         // The network endpoint
+#include "NetworkEndpoint.hpp"         // The network endpoint
 #include "SerialMessage.hpp"           // Serial message format
 #include "DeserializingActor.hpp"      // To de-serialise messages
 #include "LinkMessage.hpp"             // Message to be sent on the link
@@ -67,26 +67,26 @@ public:
 	
 	// Getting and setting the payload
 	
-  virtual Theron::SerialMessage::Payload GetPayload( void ) const override
+  inline Theron::SerialMessage::Payload GetPayload( void ) const //override
   { return ThePayload; }
   
-  virtual 
-  void SetPayload( const Theron::SerialMessage::Payload & Payload ) override
+  inline 
+  void SetPayload( const Theron::SerialMessage::Payload & Payload ) //override
   { ThePayload = Payload; }
   
   // Getting and setting the addresses
   
-  virtual ExternalAddress GetSender   ( void ) const override
-  { return Sender; }
+//   virtual ExternalAddress GetSender   ( void ) const override
+//   { return Sender; }
   
-  virtual ExternalAddress GetRecipient( void ) const override
-  { return Receiver;	}
+//   virtual ExternalAddress GetRecipient( void ) const override
+//   { return Receiver;	}
   
-  virtual void SetSender   ( const ExternalAddress & From ) override
-  { Sender = From; }
+//   virtual void SetSender   ( const ExternalAddress & From ) override
+//   { Sender = From; }
   
-  virtual void SetRecipient( const ExternalAddress & To   ) override
-  { Receiver = To; };
+//   virtual void SetRecipient( const ExternalAddress & To   ) override
+//   { Receiver = To; };
 
   // The message must provide a way to convert an external address to an 
   // address and in this case it is simple since the external address is
@@ -103,8 +103,7 @@ public:
   
   OutsideMessage( const Theron::SerialMessage::Payload & GivenPayload, 
 									const ExternalAddress & From, const ExternalAddress & To )
-	: Theron::LinkMessage< ExternalAddress >(),
-	  Sender( From ), Receiver( To ), ThePayload( GivenPayload )
+	: Theron::LinkMessage< ExternalAddress >(From , To ,GivenPayload)
 	{	}
 
 	virtual ~OutsideMessage( void )
@@ -226,7 +225,7 @@ protected:
 	// when all other actors are done with their work. Here it just prints a 
 	// message.
 	
-	virtual void StartShutDown( const Network::ShutDownMessage & TheMessage, 
+	virtual void StartShutDown( const Network::ShutDown/*ShutDownMessage*/ & TheMessage, 
 													    const Address Sender ) override
 	{
 		Theron::ConsolePrint LogMessage;

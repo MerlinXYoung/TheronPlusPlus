@@ -158,18 +158,23 @@ AMQ_OBJECTS = ${AMQ_SOURCE:.cpp=.o}
 # The involved AMQ libraries are in non-standard locations and the include
 # directories must be set accordingly.
 
-AMQ_INCLUDE = -I/usr/include/activemq-cpp-3.9.4/ -I/usr/include/apr-1
+#AMQ_INCLUDE = -I/usr/include/activemq-cpp-3.9.4/ -I/usr/include/apr-1
+AMQ_INCLUDE = -I/usr/local/activemq-cpp/include/activemq-cpp-3.9.5 -I/usr/include/apr-1.0
 
 # It will by default create complaints about depreciated declarations, and
 # this warning is disabled.
 
 AMQ_FLAGS = -Wno-deprecated-declarations
 
+
+#Boost
+BOOST_INCLUDE = -I/usr/local/boost/include
+
 # Then the build command is set to include these additional definitions.
 
 $(OBJECTS_DIR)/%.o : $(AMQ_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(AMQ_FLAGS) $< -o $@ $(INCLUDE_DIRECTORIES) \
-	$(AMQ_INCLUDE)
+	$(AMQ_INCLUDE) $(BOOST_INCLUDE)
 
 #------------------------------------------------------------------------------
 #

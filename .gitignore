@@ -5,3 +5,6 @@
 *.project
 *.directory
 *.a
+
+.vscode
+build

@@ -621,8 +621,8 @@ public:
 		private:
 			
 			virtual bool ProccessMessage( 
-      const ObjectMessage & ReceivedMessage ) override
-      {
+			const ObjectMessage & ReceivedMessage ) override
+			{
 				std::shared_ptr< MessageWrapper< MessageType > > RealMessage = 
 					std::dynamic_pointer_cast< MessageWrapper< MessageType > >( 
 						ReceivedMessage );
@@ -630,7 +630,7 @@ public:
 				if ( RealMessage )
 				{
 					(TheObject->*HandlerFunction)( *(RealMessage->TheMessage), 
-																				   RealMessage->From );					
+																				RealMessage->From );					
 					return true;
 				}
 				else
@@ -1153,4 +1153,5 @@ public:
 
 };     // End class Scheduled
 }      // End namespace Theron
-#endif // THERON_SCHEDULED
+// #endif // THERON_SCHEDULED
+#endif
